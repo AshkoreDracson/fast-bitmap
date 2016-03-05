@@ -18,14 +18,9 @@ class Program
         {
             FastBitmap f = FastBitmap.FromFile(ofd.FileName);
 
-            // Draw a cute rectangle at the top left
-            for (int y = 0; y < 50; y++)
-            {
-                for (int x = 0; x < 50; x++)
-                {
-                    f.SetPixel(x, y, c);
-                }
-            }
+            // Blur it
+            f.Effects.BoxBlur(3);
+            
 
             Console.WriteLine("Please select the save path");
 
