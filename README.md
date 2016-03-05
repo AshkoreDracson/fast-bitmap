@@ -30,7 +30,14 @@ FastBitmap f = new FastBitmap(width, height);
 Bitmap b = f;
 ```
 
+###Effects example
+```cs
+FastBitmap f = new FastBitmap(width, height);
+f.Effects.BoxBlur(3);
+f.Save(path);
+```
+
 #Coming soon
 
   - PNG support + 32bbp + 16bbp + 8bbp support
-  - More methods to edit images (Effects, etc...)
+  - More methods to edit images
