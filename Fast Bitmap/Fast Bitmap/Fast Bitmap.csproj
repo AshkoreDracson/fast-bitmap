@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="FastBitmap.cs" />
     <Compile Include="FastColor.cs" />
+    <Compile Include="Mathf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
