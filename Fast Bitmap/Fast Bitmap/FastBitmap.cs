@@ -194,6 +194,25 @@ namespace FastBitmapLib
                 }
             }
             /// <summary>
+            /// Sets the luminosity of the image.
+            /// </summary>
+            /// <param name="luminosityFactor">The luminosity factor</param>
+            public void Luminosity(float luminosityFactor)
+            {
+                for (int x = 0; x < f.Width; x++)
+                {
+                    for (int y = 0; y < f.Height; y++)
+                    {
+                        FastColor c = f.GetPixel(x, y);
+                        c = new FastColor(
+                            Mathf.ClampByte((byte)(c.R * luminosityFactor)), 
+                            Mathf.ClampByte((byte)(c.G * luminosityFactor)), 
+                            Mathf.ClampByte((byte)(c.B * luminosityFactor)));
+                        f.SetPixel(x, y, c);
+                    }
+                }
+            }
+            /// <summary>
             /// Blurs the image using the Box Blur technique, currently atrociously slow.
             /// </summary>
             /// <param name="blurSize">The size of the blur, a higher size means more blurring.</param>

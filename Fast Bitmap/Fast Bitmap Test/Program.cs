@@ -18,8 +18,8 @@ class Program
         {
             FastBitmap f = FastBitmap.FromFile(ofd.FileName);
 
-            // Blur it
-            f.Effects.BoxBlur(3);
+            // Darken it
+            f.Effects.Luminosity(0.5f);
             
 
             Console.WriteLine("Please select the save path");
