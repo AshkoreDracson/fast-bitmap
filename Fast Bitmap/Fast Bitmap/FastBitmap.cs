@@ -40,9 +40,37 @@ namespace FastBitmapLib
             data = new FastColor[width, height];
             Effects = new ImageEffects(this);
         }
+        /// <summary>
+        /// Initializes a new instance of FastBitmap with a specified clear color.
+        /// </summary>
+        /// <param name="width">The width in pixels of the FastBitmap</param>
+        /// <param name="height">The height in pixels of the FastBitmap</param>
+        /// <param name="color">The clear color</param>
+        public FastBitmap(int width, int height, FastColor color)
+        {
+            Width = width;
+            Height = height;
+            data = new FastColor[width, height];
+            Clear(color);
+            Effects = new ImageEffects(this);
+        }
 
         // METHODS & FUNCTIONS
 
+        /// <summary>
+        /// Clears the image with a specified color.
+        /// </summary>
+        /// <param name="color">The color</param>
+        public void Clear(FastColor color)
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    data[x, y] = color;
+                }
+            }
+        }
         /// <summary>
         /// Gets the pixel color at the specified coordinates.
         /// </summary>
