@@ -1,3 +1,7 @@
+#Installation
+
+[Nuget Package](https://www.nuget.org/packages/Fast-Bitmap/)
+
 #How to use
 
 ###New instance
