@@ -18,9 +18,8 @@ class Program
         {
             FastBitmap f = FastBitmap.FromFile(ofd.FileName);
 
-            // Darken it
-            f.Effects.Luminosity(0.5f);
-            
+            // Edge detection, yay!
+            f.Effects.EdgeDetection();
 
             Console.WriteLine("Please select the save path");
 

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.Linq;
 
 namespace FastBitmapLib
 {
@@ -276,6 +277,54 @@ namespace FastBitmapLib
                 }
 
                 // Final pass, feed blurred data to FastBitmap
+
+                for (int x = 0; x < f.Width; x++)
+                {
+                    for (int y = 0; y < f.Height; y++)
+                    {
+                        f.SetPixel(x, y, finalData[x, y]);
+                    }
+                }
+            }
+            /// <summary>
+            /// Detects edges in your image, uses a 3x3 kerning. (Atrociously slow too, I really need to find better ways at this)
+            /// </summary>
+            public void EdgeDetection()
+            {
+                FastColor[,] finalData = new FastColor[f.Width, f.Height];
+
+                for (int x = 0; x < f.Width; x++)
+                {
+                    for (int y = 0; y < f.Height; y++)
+                    {
+                        FastColor[] temp = new FastColor[3 * 3];
+                        int tempIndex = 0;
+
+                        for (int x2 = -1; x2 <= 1; x2++) // 3x3 kerning
+                        {
+                            for (int y2 = -1; y2 <= 1; y2++)
+                            {
+                                temp[tempIndex++] = f.GetPixel(x + x2, y + y2);
+                            }
+                        }
+
+                        byte[] rArr = temp.Select(o => o.R).ToArray();
+                        byte[] gArr = temp.Select(o => o.G).ToArray();
+                        byte[] bArr = temp.Select(o => o.B).ToArray();
+
+                        byte rMin = Mathf.Min(rArr);
+                        byte gMin = Mathf.Min(gArr);
+                        byte bMin = Mathf.Min(bArr);
+
+                        byte rMax = Mathf.Max(rArr);
+                        byte gMax = Mathf.Max(gArr);
+                        byte bMax = Mathf.Max(bArr);
+
+                        byte final = Mathf.Max((byte)(rMax - rMin), (byte)(gMax - gMin), (byte)(bMax - bMin));
+
+                        finalData[x, y] = new FastColor(final, final, final);
+                    }
+                }
 
                 for (int x = 0; x < f.Width; x++)
                 {
